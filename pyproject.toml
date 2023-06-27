@@ -1,0 +1,19 @@
+[tool.black]
+line-length = 100
+
+[tool.ruff]
+# See rules at: https://beta.ruff.rs/docs/rules/
+line-length = 100
+ignore = [
+  # Disabled because:
+  "E501", # Line-length handled by black
+  "F403", # some start imports
+  "F405"  # not detected as imported because star imports
+]
+
+[tool.isort]
+profile = "black"
+
+[tool.bandit]
+# See rules at: https://bandit.readthedocs.io/en/1.7.4/blacklists/blacklist_calls.html
+skips = []
