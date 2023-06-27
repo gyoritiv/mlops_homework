@@ -7,3 +7,4 @@
 - https://medium.com/@umeshnmenon/ml-model-orchestration-recommendations-35702b27e2b2
 - https://medium.com/code-wild/building-a-machine-learning-orchestration-platform-part-1-d1ae7e03f9b9
 - https://neptune.ai/blog/how-to-serve-machine-learning-models-with-tensorflow-serving-and-docker
+- https://towardsdatascience.com/checkpointing-deep-learning-models-in-keras-a652570b8de6
