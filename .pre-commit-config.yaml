@@ -30,3 +30,9 @@ repos:
       - id: bandit
         args: ["-c", "./pyproject.toml"]
         additional_dependencies: ["bandit[toml]"]
+  - repo: https://github.com/adrienverge/yamllint.git
+    rev: v1.32.0
+    hooks:
+      - id: yamllint
+        name: YAML Lint
+        args: [-c, ./yamllint-config.yaml]
