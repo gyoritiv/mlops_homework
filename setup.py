@@ -1,8 +1,10 @@
+import versioneer
 from setuptools import setup, find_packages
 
 
 setup(
     name="mlops",
-    version="1.0",
+    version=versioneer.get_version(),
+    cmdclass=versioneer.get_cmdclass(),
     packages=find_packages(),
 )
