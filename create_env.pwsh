@@ -1,3 +1,7 @@
-conda env create --name mlops_env python=3.7.6 --file requirements.txt
-conda activate mlops_env
+python -m venv venv
+.\mlops_env\Scripts\activate
+pip install --upgrade setuptools
+pip install --upgrade pip
+pip install -r requirements.txt
 pip install -e .
+python mlops/main.py

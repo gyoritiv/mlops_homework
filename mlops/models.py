@@ -15,6 +15,7 @@ logging.basicConfig(
 
 
 def setup_default_model():
+    """Setup default model properties and return the model"""
     model = Sequential()
     model.add(
         Conv2D(
@@ -60,7 +61,7 @@ def setup_checkpoint_path(path: str):
         Default checkpoint folder path in repo root if path is None else returns the given filepath
     """
     if path is None:
-        path = str(Path(__file__).parent.absolute() / "checkpoint" / "weights.best.hdf5")
+        path = str(Path(__file__).parent.parent.absolute() / "checkpoint" / "weights.best.hdf5")
         logging.info(f"Path for checkpoint not provided, using the default path: {path}")
         return path
     else:
