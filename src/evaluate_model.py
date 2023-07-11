@@ -36,6 +36,7 @@ def evaluate_model(dataX, dataY, checkpoint_file_path=None, n_folds=5):
         logging.info(f"Accuracy: > {(acc * 100.0)}")
         scores.append(acc)
         histories.append(history)
+    kfold = KFold(n_folds, shuffle=True, random_state=1)
     return scores, histories
 
 
