@@ -1,5 +1,8 @@
 """ This module is responsible for evaluating the cnn model with k-fold cross-validation """
+# import time
 import logging
+
+# from pathlib import Path
 from sklearn.model_selection import KFold
 from models import cnn_model
 
@@ -36,5 +39,5 @@ def evaluate_model(dataX, dataY, checkpoint_file_path=None, n_folds=5):
     return scores, histories
 
 
-def save_cnn_model(model):
-    print("csoki")
+def save_cnn_model(cnn_model):
+    print(cnn_model)
