@@ -34,3 +34,7 @@ def evaluate_model(dataX, dataY, checkpoint_file_path=None, n_folds=5):
         scores.append(acc)
         histories.append(history)
     return scores, histories
+
+
+def save_cnn_model(model):
+    print("csoki")
