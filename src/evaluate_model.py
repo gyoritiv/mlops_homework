@@ -40,4 +40,5 @@ def evaluate_model(dataX, dataY, checkpoint_file_path=None, n_folds=5):
 
 
 def save_cnn_model(cnn_model):
-    print(cnn_model)
+    cnn_model_path = "C:\Repositories\mlops_homework"
+    cnn_model.save(filepath=cnn_model_path, save_format="tf")
