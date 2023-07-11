@@ -32,9 +32,13 @@ def setup_default_model():
 def cnn_model(checkpoint_path: str):
     """Return cnn model"""
     model = setup_default_model()
-    checkpoint = save_checkpoint(checkpoint_path)
-    opt = SGD(lr=0.01, momentum=0.9)
+    checkpoint_path = setup_checkpoint_path(checkpoint_path)
+    if Path(checkpoint_path).exists():
+        logging.info(f"Checkpoint already exist, loading weights from path: {checkpoint_path}")
+        model.load_weights(checkpoint_path)
+    opt = SGD(learning_rate=0.01, momentum=0.9)
     model.compile(optimizer=opt, loss="categorical_crossentropy", metrics=["accuracy"])
+    checkpoint = []  # save_checkpoint(checkpoint_path)
     return model, checkpoint
 
 
@@ -44,9 +48,8 @@ def load_weights(model, checkpoint_path: str):
 
 def save_checkpoint(checkpoint_path: str):
     """Saving checkpoint to checkpoint path based on best weights"""
-    model_path = setup_checkpoint_path(checkpoint_path)
     checkpoint = ModelCheckpoint(
-        model_path, monitor="val_accuracy", verbose=1, save_best_only=True, mode="max"
+        checkpoint_path, monitor="val_accuracy", verbose=1, save_best_only=True, mode="max"
     )
     earlystop = EarlyStopping(monitor="val_accuracy", patience=5)
     return [checkpoint, earlystop]
