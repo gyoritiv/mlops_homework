@@ -1,0 +1,2 @@
+_version.py export-subst
+mlops/_version.py export-subst
