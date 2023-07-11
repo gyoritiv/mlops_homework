@@ -3,7 +3,7 @@ import time
 import logging
 from pathlib import Path
 from sklearn.model_selection import KFold
-from models import cnn_model
+from mlops.models import cnn_model
 
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s", datefmt="%H:%M:%S"
@@ -40,5 +40,5 @@ def evaluate_model(dataX, dataY, checkpoint_file_path=None, n_folds=5):
 
 
 def save_cnn_model(cnn_model):
-    cnn_model_path = str(Path(__file__).parent.absolute() / "model" / f"{int(time.time())}")
+    cnn_model_path = str(Path(__file__).parent.absolute() / "mnist_model" / f"{int(time.time())} /")
     cnn_model.save(filepath=cnn_model_path, save_format="tf")

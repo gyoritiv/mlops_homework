@@ -1,6 +1,6 @@
 """This modul is responsible for visualize the dataset"""
-from load_dataset import load_fashion_mnist_dataset
 from matplotlib import pyplot
+from mlops.load_dataset import load_fashion_mnist_dataset
 
 
 def visualize_dataset():

@@ -1,5 +1,5 @@
-from load_dataset import load_dataset, prep_pixels
-from evaluate_model import evaluate_model
+from mlops.load_dataset import load_dataset, prep_pixels
+from mlops.evaluate_model import evaluate_model
 
 
 def run():
