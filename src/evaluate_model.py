@@ -30,7 +30,7 @@ def evaluate_model(dataX, dataY, checkpoint_file_path=None, n_folds=5):
             verbose=0,
         )
         _, acc = model.evaluate(testX, testY, verbose=0)
-        logging.info(f"> {(acc * 100.0)}")
+        logging.info(f"Accuracy: > {(acc * 100.0)}")
         scores.append(acc)
         histories.append(history)
     return scores, histories

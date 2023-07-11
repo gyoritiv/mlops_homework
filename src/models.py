@@ -1,4 +1,5 @@
 """ This modul is creating convolutional neural network model """
+import logging
 from pathlib import Path
 from keras.models import Sequential
 from keras.layers import Conv2D
@@ -8,9 +9,12 @@ from keras.layers import Flatten
 from keras.optimizers import SGD
 from tensorflow.keras.callbacks import ModelCheckpoint, EarlyStopping
 
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s", datefmt="%H:%M:%S"
+)
 
-def cnn_model(checkpoint_path: str):
-    """Return cnn model"""
+
+def setup_default_model():
     model = Sequential()
     model.add(
         Conv2D(
@@ -21,16 +25,27 @@ def cnn_model(checkpoint_path: str):
     model.add(Flatten())
     model.add(Dense(100, activation="relu", kernel_initializer="he_uniform"))
     model.add(Dense(10, activation="softmax"))
-    opt = SGD(lr=0.01, momentum=0.9)
+    return model
+
+
+def cnn_model(checkpoint_path: str):
+    """Return cnn model"""
+    model = setup_default_model()
     checkpoint = save_checkpoint(checkpoint_path)
+    opt = SGD(lr=0.01, momentum=0.9)
     model.compile(optimizer=opt, loss="categorical_crossentropy", metrics=["accuracy"])
     return model, checkpoint
 
 
-def save_checkpoint(checkpoint_path):
+def load_weights(model, checkpoint_path: str):
+    return model.load_weights(checkpoint_path)
+
+
+def save_checkpoint(checkpoint_path: str):
     """Saving checkpoint to checkpoint path based on best weights"""
+    model_path = setup_checkpoint_path(checkpoint_path)
     checkpoint = ModelCheckpoint(
-        checkpoint_path, monitor="val_accuracy", verbose=1, save_best_only=True, mode="max"
+        model_path, monitor="val_accuracy", verbose=1, save_best_only=True, mode="max"
     )
     earlystop = EarlyStopping(monitor="val_accuracy", patience=5)
     return [checkpoint, earlystop]
@@ -45,6 +60,8 @@ def setup_checkpoint_path(path: str):
         Default checkpoint folder path in repo root if path is None else returns the given filepath
     """
     if path is None:
-        return str(Path(__file__).parent.absolute() / "checkpoint" / "weights.best.hdf5")
+        path = str(Path(__file__).parent.absolute() / "checkpoint" / "weights.best.hdf5")
+        logging.info(f"Path for checkpoint not provided, using the default path: {path}")
+        return path
     else:
         return path
