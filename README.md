@@ -1,4 +1,6 @@
-# mlops_homework
+# Welcome to MLOps homework repository
+
+This repository includes python code related to mlops homework. The repo contains training, evaluating fashion mnist dataset and saving, checkpointing the model. The model is served on localhost with tf_serving docker image.
 
 ## Useful links
 
