@@ -1,0 +1,5 @@
+{
+    "containerName": "tfserving_fashion_mnist",
+    "modelName": "mnist_model",
+    "portNumber": 8501
+}
