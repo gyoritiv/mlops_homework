@@ -9,7 +9,7 @@ logging.basicConfig(
 )
 
 
-def evaluate_model(trainX, trainY, testX, testY, checkpoint_file_path=None, n_folds=5):
+def evaluate_model(trainX, trainY, testX, testY, checkpoint_file_path=None):
     """evaluating the model"""
     model, callback_list = cnn_model(checkpoint_file_path)
     history = model.fit(
