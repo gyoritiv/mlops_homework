@@ -2,7 +2,6 @@
 import time
 import logging
 from pathlib import Path
-from sklearn.model_selection import KFold
 from mlops.models import cnn_model
 
 logging.basicConfig(
@@ -10,33 +9,22 @@ logging.basicConfig(
 )
 
 
-def evaluate_model(dataX, dataY, checkpoint_file_path=None, n_folds=5):
+def evaluate_model(trainX, trainY, testX, testY, checkpoint_file_path=None, n_folds=5):
     """evaluating the model"""
-    scores, histories = list(), list()
-    kfold = KFold(n_folds, shuffle=True, random_state=1)
-    for train_ix, test_ix in kfold.split(dataX):
-        model, callback_list = cnn_model(checkpoint_file_path)
-        trainX, trainY, testX, testY = (
-            dataX[train_ix],
-            dataY[train_ix],
-            dataX[test_ix],
-            dataY[test_ix],
-        )
-        history = model.fit(
-            trainX,
-            trainY,
-            epochs=10,
-            batch_size=32,
-            callbacks=callback_list,
-            validation_data=(testX, testY),
-            verbose=0,
-        )
-        _, acc = model.evaluate(testX, testY, verbose=0)
-        logging.info(f"Accuracy: > {(acc * 100.0)}")
-        scores.append(acc)
-        histories.append(history)
+    model, callback_list = cnn_model(checkpoint_file_path)
+    history = model.fit(
+        trainX,
+        trainY,
+        epochs=10,
+        batch_size=32,
+        callbacks=callback_list,
+        validation_data=(testX, testY),
+        verbose=0,
+    )
+    _, acc = model.evaluate(testX, testY, verbose=0)
+    logging.info(f"Accuracy: > {(acc * 100.0)}")
     save_cnn_model(model)
-    return scores, histories
+    return history, acc
 
 
 def save_cnn_model(cnn_model):
