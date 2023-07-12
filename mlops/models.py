@@ -38,7 +38,7 @@ def cnn_model(checkpoint_path: str):
         model.load_weights(checkpoint_path)
     opt = SGD(learning_rate=0.01, momentum=0.9)
     model.compile(optimizer=opt, loss="categorical_crossentropy", metrics=["accuracy"])
-    checkpoint = []  # save_checkpoint(checkpoint_path)
+    checkpoint = save_checkpoint(checkpoint_path)
     return model, checkpoint
 
 
@@ -65,7 +65,7 @@ def save_checkpoint(checkpoint_path: str):
     checkpoint = ModelCheckpoint(
         checkpoint_path, monitor="val_accuracy", verbose=1, save_best_only=True, mode="max"
     )
-    earlystop = EarlyStopping(monitor="val_accuracy", patience=5)
+    earlystop = EarlyStopping(monitor="val_accuracy", patience=4)
     return [checkpoint, earlystop]
 
 
