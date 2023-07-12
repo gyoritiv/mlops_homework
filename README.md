@@ -9,7 +9,7 @@ This repository includes python code related to mlops homework. The repo contain
 - To setup the python virtual environment from windows run create_env.ps1 from the repo root.
 - If you are a contributor, please don't forget to call `pre-commit install` to activate pre-commit hooks
 - After environment is ready to train and evaluate the model activate .venv virtual environment and run the `python mlops/main.py` command. This will train and evaluate the model.
-- In order to run the docker container first install docker then pull tensorflow/serving with `docker pull tensorflow/serving`, then run setup configuration in `config.json` in repo root. Currently before running the `tf_serving.ps1` powershell script to serve the model you need to modify the model path in the powershell script but later this is planned to be fixed. After every of these configurations are set please run the tf_serving.ps1 script in order to serve the model on localhost
+- In order to run the docker container first install docker then pull tensorflow/serving with `docker pull tensorflow/serving`, then run setup configuration in `config.json` in repo root. Currently before running the `tf_serving.ps1` powershell script to serve the model you need to modify the model path in the powershell script but later this is planned to be fixed. After every of these configurations are set please run the `tf_serving.ps1` script in order to serve the model on localhost
 - To send predictions you can use the `mlops/predict.py` script.
 
 ## Useful links
