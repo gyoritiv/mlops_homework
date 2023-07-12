@@ -6,7 +6,13 @@ API_URL = "http://localhost:8501/v1/models/mnist_model:predict"
 
 
 def make_prediction(instances):
-    """Make a prediction"""
+    """This function is responsible for sending data to the API_URL and make a predition
+
+    Args:
+        instances (numpy array): data to send via the restapi call
+
+    Returns:
+        predictions: predictions done by the tf model"""
     data = json.dumps({"signature_name": "serving_default", "instances": instances.tolist()})
     headers = {"content-type": "application/json"}
     json_response = requests.post(API_URL, data=data, headers=headers, timeout=60)

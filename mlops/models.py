@@ -43,11 +43,25 @@ def cnn_model(checkpoint_path: str):
 
 
 def load_weights(model, checkpoint_path: str):
+    """Load weights for the ml model
+
+    Args:
+        model (Sequential): keras model
+        checkpoint_path (str): Path of the checkpoint file.
+
+    Returns:
+        model (Sequential): keras model containing the weights coming from hdf file"""
     return model.load_weights(checkpoint_path)
 
 
 def save_checkpoint(checkpoint_path: str):
-    """Saving checkpoint to checkpoint path based on best weights"""
+    """Saving checkpoint to checkpoint path based on best weights
+
+    Args:
+        checkpoint_path (str): Path of the checkpoint file.
+
+    Returns:
+        list: checkpoint and earlystop callback list for the fiting"""
     checkpoint = ModelCheckpoint(
         checkpoint_path, monitor="val_accuracy", verbose=1, save_best_only=True, mode="max"
     )
